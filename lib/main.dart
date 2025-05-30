@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quizz_app/screens/onboardingScreen.dart';
 
-void main() =>
-    runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
+void main() => runApp(
+  MaterialApp(debugShowCheckedModeBanner: false, home: OnboardingScreen()),
+);
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -11,7 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Icon> scorKeeper = [];
+  List<Icon> scoreKeeper = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class _MyAppState extends State<MyApp> {
             onPressed:
                 () => {
                   setState(() {
-                    scorKeeper.add(Icon(Icons.check, color: Colors.green));
+                    scoreKeeper.add(Icon(Icons.check, color: Colors.green));
                   }),
                 },
             child: Text("Ture"),
@@ -32,12 +34,12 @@ class _MyAppState extends State<MyApp> {
             onPressed:
                 () => {
                   setState(() {
-                    scorKeeper.add(Icon(Icons.close, color: Colors.red));
+                    scoreKeeper.add(Icon(Icons.close, color: Colors.red));
                   }),
                 },
             child: Text("False"),
           ),
-          Row(children: scorKeeper),
+          Row(children: scoreKeeper),
         ],
       ),
     );
