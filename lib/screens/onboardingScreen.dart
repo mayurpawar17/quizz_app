@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quizz_app/screens/quizScreen.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -38,11 +39,10 @@ class OnboardingScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: Colors.white70),
                 ),
                 const SizedBox(height: 40),
-                SV==
 
                 // App Image
-               (
-                  'assets/game_icon.png', // Replace with your image path
+                SvgPicture.asset(
+                  'assets/quiz.svg', // Replace with your image path
                   height: 200,
                   width: 200,
                 ),
