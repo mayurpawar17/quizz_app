@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizz_app/questions.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -11,71 +12,42 @@ class _QuizScreenState extends State<QuizScreen> {
   int currentQuestionIndex = 0;
   int score = 0;
 
-  final List<Map<String, dynamic>> questions = [
-    {
-      'question': 'The capital of France is Paris.',
-      'answer': true,
-    },
-    {
-      'question': 'The Great Wall of China is visible from space with the naked eye.',
-      'answer': false,
-    },
-    {
-      'question': 'The human body has four lungs.',
-      'answer': false,
-    },
-    {
-      'question': 'Venus is the hottest planet in our solar system.',
-      'answer': true,
-    },
-    {
-      'question': 'The chemical symbol for gold is Ag.',
-      'answer': false, // It's Au
-    },
-    {
-      'question': 'The Nile is the longest river in the world.',
-      'answer': true,
-    },
-    {
-      'question': 'Penguins are mammals.',
-      'answer': false, // They're birds
-    },
-    {
-      'question': 'The currency of Japan is the yen.',
-      'answer': true,
-    },
-    {
-      'question': 'Lightning never strikes the same place twice.',
-      'answer': false,
-    },
-    {
-      'question': 'The human skeleton is made up of less than 100 bones.',
-      'answer': false, // About 206 bones
-    },
-    {
-      'question': 'The Titanic sank in 1912.',
-      'answer': true,
-    },
-    {
-      'question': 'The Earth is the third planet from the sun.',
-      'answer': true,
-    },
-    {
-      'question': 'The capital of Canada is Toronto.',
-      'answer': false, // It's Ottawa
-    },
-    {
-      'question': 'Bananas grow on trees.',
-      'answer': false, // They grow on herbaceous plants
-    },
-    {
-      'question': 'The square root of 144 is 12.',
-      'answer': true,
-    },
+  List<Question> questionBank = [
+    // Original questions
+    Question(q: 'The capital of France is Paris.', a: true),
+    Question(q: 'The square root of 144 is 12.', a: true),
+    Question(q: 'Bananas grow on trees.', a: false),
+    // They grow on herbaceous plants!
+
+    // New general knowledge questions
+    Question(q: 'The Great Wall of China is visible from space.', a: false),
+    // Myth!
+    Question(q: 'Venus is the hottest planet in the solar system.', a: true),
+    Question(q: 'The currency of Japan is the Yuan.', a: false),
+    // It’s the Yen.
+
+    // Science questions
+    Question(q: 'Water boils at 100°C at sea level.', a: true),
+    Question(q: 'Humans have five senses.', a: false),
+    // Technically more (e.g., balance, proprioception).
+    Question(q: 'Light travels faster than sound.', a: true),
+
+    // Geography questions
+    Question(q: 'The Nile is the longest river in the world.', a: true),
+    Question(q: 'Canada is the largest country by land area.', a: false),
+    // Russia is larger.
+    Question(q: 'Mount Everest is in the Himalayas.', a: true),
+
+    // Fun/trivia questions
+    Question(q: 'The loudest animal on Earth is the blue whale.', a: true),
+    Question(q: 'Penguins can fly.', a: false),
+    Question(q: 'The human body has four lungs.', a: false),
+    // Only two!
   ];
 
   void answerQuestion(bool userAnswer) {
-    bool correctAnswer = questions[currentQuestionIndex]['answer'];
+    // bool correctAnswer = questions[currentQuestionIndex]['answer'];
+    bool correctAnswer = questionBank[currentQuestionIndex].answer;
 
     setState(() {
       if (userAnswer == correctAnswer) {
@@ -83,7 +55,7 @@ class _QuizScreenState extends State<QuizScreen> {
       }
 
       // Move to next question or show results
-      if (currentQuestionIndex < questions.length - 1) {
+      if (currentQuestionIndex < questionBank.length - 1) {
         currentQuestionIndex++;
       } else {
         // Quiz finished - show results
@@ -92,7 +64,7 @@ class _QuizScreenState extends State<QuizScreen> {
           builder:
               (context) => AlertDialog(
                 title: const Text('Quiz Completed!'),
-                content: Text('Your score: $score/${questions.length}'),
+                content: Text('Your score: $score/${questionBank.length}'),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -123,7 +95,8 @@ class _QuizScreenState extends State<QuizScreen> {
           children: [
             // Question text
             Text(
-              questions[currentQuestionIndex]['question'],
+              questionBank[currentQuestionIndex].question,
+              // questions[currentQuestionIndex]['question'],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
@@ -153,7 +126,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
             // Progress indicator
             Text(
-              'Question ${currentQuestionIndex + 1}/${questions.length}',
+              'Question ${currentQuestionIndex + 1}/${questionBank.length}',
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16),
             ),
